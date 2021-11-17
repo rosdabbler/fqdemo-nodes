@@ -7,7 +7,7 @@
               "limitSymbolsToIncludedHeaders": true
           },
           "includePath": [
-              "${workspaceFolder}/../../install/fqdemo_msgs/include",
+              "${workspaceFolder}/../../install/**",
               "/opt/ros/galactic/include",
               "/usr/include/**",
               "${workspaceFolder}/**"
