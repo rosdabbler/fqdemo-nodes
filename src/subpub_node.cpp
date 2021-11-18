@@ -13,18 +13,14 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include <gtest/gtest.h>
-#include <tuple>
+#include <memory>
+#include "rclcpp/rclcpp.hpp"
 #include "fqdemo_nodes/demo_sub_pub.hpp"
 
-namespace fqdemo_nodes
+int main(int argc, char * argv[])
 {
-
-TEST(fqdemo_nodes, ApplyPowers)
-{
-  std::tuple<double, double> t1_1 = DemoSubPub::apply_powers(1.0, 1.0);
-  ASSERT_DOUBLE_EQ(1.0, std::get<0>(t1_1));
-  ASSERT_DOUBLE_EQ(1.0, std::get<1>(t1_1));
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared<fqdemo_nodes::DemoSubPub>());
+  rclcpp::shutdown();
+  return 0;
 }
-
-}  // namespace fqdemo_nodes

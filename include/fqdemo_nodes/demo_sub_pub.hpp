@@ -21,14 +21,15 @@
 #include "fqdemo_msgs/msg/num_pwr_result.hpp"
 #include "fqdemo_msgs/msg/num_pwr_data.hpp"
 
-namespace fqdemo_nodes {
+namespace fqdemo_nodes
+{
 
 class DemoSubPub : public rclcpp::Node
 {
 public:
-  explicit DemoSubPub();
-  virtual ~DemoSubPub() {};
-  std::tuple<double, double> apply_powers(const double_t number, const double power);
+  DemoSubPub();
+  virtual ~DemoSubPub() {}
+  static std::tuple<double, double> apply_powers(const double_t number, const double power);
 
 private:
   void topic_callback(const fqdemo_msgs::msg::NumPwrData::SharedPtr msg);

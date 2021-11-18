@@ -18,6 +18,7 @@
 #include <memory>
 #include <string>
 #include <cmath>
+#include <tuple>
 
 #include "fqdemo_nodes/demo_sub_pub.hpp"
 
@@ -27,25 +28,26 @@ using std::placeholders::_1;
 /* This example creates a subclass of Node and uses std::bind() to register a
  * member function as a callback from the timer. */
 
-namespace fqdemo_nodes {
+namespace fqdemo_nodes
+{
 
 DemoSubPub::DemoSubPub()
 : rclcpp::Node("demo_sub_pub"),
   count_(0)
-  {
-    publisher_ = this->create_publisher<fqdemo_msgs::msg::NumPwrResult>("power_result", 10);
-    subscriber_ = this->create_subscription<fqdemo_msgs::msg::NumPwrData>(
-      "num_power", 10, std::bind(&DemoSubPub::topic_callback, this, _1));
-    timer_ = this->create_wall_timer(
-      2000ms, std::bind(&DemoSubPub::timer_callback, this));
-  }
+{
+  publisher_ = this->create_publisher<fqdemo_msgs::msg::NumPwrResult>("power_result", 10);
+  subscriber_ = this->create_subscription<fqdemo_msgs::msg::NumPwrData>(
+    "num_power", 10, std::bind(&DemoSubPub::topic_callback, this, _1));
+  timer_ = this->create_wall_timer(
+    2000ms, std::bind(&DemoSubPub::timer_callback, this));
+}
 
-  std::tuple<double, double> DemoSubPub::apply_powers(const double_t number, const double power)
-  {
-    double to_power = pow(number, power);
-    double to_root = pow(number, 1. / power);
-    return std::tuple<double, double>{to_power, to_root};
-  }
+std::tuple<double, double> DemoSubPub::apply_powers(const double_t number, const double power)
+{
+  double to_power = pow(number, power);
+  double to_root = pow(number, 1. / power);
+  return std::tuple<double, double>{to_power, to_root};
+}
 
 void DemoSubPub::topic_callback(const fqdemo_msgs::msg::NumPwrData::SharedPtr msg)
 {
@@ -72,12 +74,3 @@ void DemoSubPub::timer_callback()
 }
 
 }  // namespace fqdemo_nodes
-
-int main(int argc, char * argv[])
-{
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<fqdemo_nodes::DemoSubPub>());
-  rclcpp::shutdown();
-  return 0;
-}
-

@@ -10,6 +10,20 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(fqdemo_msgs REQUIRED)
 
+add_library(${PROJECT_NAME} src/demo_sub_pub.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+ament_target_dependencies(${PROJECT_NAME} rclcpp fqdemo_msgs)
+
+add_executable(subpub src/subpub_node.cpp)
+target_include_directories(subpub PRIVATE include)
+ament_target_dependencies(subpub rclcpp fqdemo_msgs)
+target_link_libraries(subpub ${PROJECT_NAME})
+
+install(TARGETS
+  subpub
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -19,14 +33,15 @@ if(BUILD_TESTING)
   # uncomment the line when this package is not in a git repo
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  # gtest
+  find_package(ament_cmake_gtest REQUIRED())
+  include_directories(include)
+  ament_add_gtest(test_fqdemo_nodes
+    test/test_apply_powers
+  )
+  target_link_libraries(test_fqdemo_nodes ${PROJECT_NAME})
+  ament_target_dependencies(test_fqdemo_nodes rclcpp fqdemo_msgs)
 endif()
 
-add_executable(subpub src/demo_sub_pub.cpp)
-target_include_directories(subpub PRIVATE include)
-ament_target_dependencies(subpub rclcpp fqdemo_msgs)
-
-install(TARGETS
-  subpub
-  DESTINATION lib/${PROJECT_NAME}
-)
 ament_package()
