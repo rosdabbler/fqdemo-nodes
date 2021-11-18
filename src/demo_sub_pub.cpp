@@ -17,10 +17,9 @@
 #include <functional>
 #include <memory>
 #include <string>
+#include <cmath>
 
-#include "rclcpp/rclcpp.hpp"
-#include "fqdemo_msgs/msg/num_pwr_result.hpp"
-#include "fqdemo_msgs/msg/num_pwr_data.hpp"
+#include "fqdemo_nodes/demo_sub_pub.hpp"
 
 using namespace std::chrono_literals;
 using std::placeholders::_1;
@@ -28,43 +27,57 @@ using std::placeholders::_1;
 /* This example creates a subclass of Node and uses std::bind() to register a
  * member function as a callback from the timer. */
 
-class DemoSubPub : public rclcpp::Node
-{
-public:
-  DemoSubPub()
-  : Node("demo_sub_pub"), count_(0)
+namespace fqdemo_nodes {
+
+DemoSubPub::DemoSubPub()
+: rclcpp::Node("demo_sub_pub"),
+  count_(0)
   {
     publisher_ = this->create_publisher<fqdemo_msgs::msg::NumPwrResult>("power_result", 10);
     subscriber_ = this->create_subscription<fqdemo_msgs::msg::NumPwrData>(
       "num_power", 10, std::bind(&DemoSubPub::topic_callback, this, _1));
     timer_ = this->create_wall_timer(
-      500ms, std::bind(&DemoSubPub::timer_callback, this));
+      2000ms, std::bind(&DemoSubPub::timer_callback, this));
   }
 
-private:
-  void topic_callback(const fqdemo_msgs::msg::NumPwrData::SharedPtr msg)
+  std::tuple<double, double> DemoSubPub::apply_powers(const double_t number, const double power)
   {
-      RCLCPP_INFO(this->get_logger(), "I heard: '%li, %li'", msg->num, msg->power);
+    double to_power = pow(number, power);
+    double to_root = pow(number, 1. / power);
+    return std::tuple<double, double>{to_power, to_root};
   }
-  rclcpp::Subscription<fqdemo_msgs::msg::NumPwrData>::SharedPtr subscriber_;
 
-  void timer_callback()
-  {
-    auto message = fqdemo_msgs::msg::NumPwrResult();
-    message.to_root = 3;
-    message.to_power = 4;
-    RCLCPP_INFO(this->get_logger(), "Publishing NumPwrResult");
-    publisher_->publish(message);
-  }
-  rclcpp::TimerBase::SharedPtr timer_;
-  rclcpp::Publisher<fqdemo_msgs::msg::NumPwrResult>::SharedPtr publisher_;
-  size_t count_;
-};
+void DemoSubPub::topic_callback(const fqdemo_msgs::msg::NumPwrData::SharedPtr msg)
+{
+  RCLCPP_INFO(this->get_logger(), "I heard: '%12.3g, %12.3g'", msg->num, msg->power);
+  auto message = fqdemo_msgs::msg::NumPwrResult();
+  auto pair = apply_powers(msg->num, msg->power);
+  message.to_root = std::get<1>(pair);
+  message.to_power = std::get<0>(pair);
+  RCLCPP_INFO(
+    this->get_logger(), "Publishing NumPwrResult power: %12.3g, root: %12.3g",
+    message.to_power, message.to_root);
+  publisher_->publish(message);
+}
+
+void DemoSubPub::timer_callback()
+{
+  auto message = fqdemo_msgs::msg::NumPwrResult();
+  message.to_root = 0.0;
+  message.to_power = 0.0;
+  RCLCPP_INFO(
+    this->get_logger(), "Publishing NumPwrResult power: %12.3g, root: %12.3g",
+    message.to_power, message.to_root);
+  publisher_->publish(message);
+}
+
+}  // namespace fqdemo_nodes
 
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<DemoSubPub>());
+  rclcpp::spin(std::make_shared<fqdemo_nodes::DemoSubPub>());
   rclcpp::shutdown();
   return 0;
 }
+

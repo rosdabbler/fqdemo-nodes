@@ -22,6 +22,7 @@ if(BUILD_TESTING)
 endif()
 
 add_executable(subpub src/demo_sub_pub.cpp)
+target_include_directories(subpub PRIVATE include)
 ament_target_dependencies(subpub rclcpp fqdemo_msgs)
 
 install(TARGETS
