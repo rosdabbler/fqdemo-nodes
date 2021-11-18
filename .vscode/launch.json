@@ -1,32 +1,24 @@
 {
-  "name": "subpub Launch",
-  "type": "cppdbg",
-  "request": "launch",
-  "program": "${workspaceFolder}/../../install/fqdemo_nodes/lib/fqdemo_nodes/subpub",
-  "args": [],
-  "stopAtEntry": true,
-  "cwd": "${workspaceFolder}",
-  "environment": [],
-  "externalConsole": false,
-  "MIMode": "gdb",
-  "setupCommands": [
-      {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-      }
-  ],
-  "inputs": [
-  {
-  "id": "package",
-  "type": "promptString",
-  "description": "Package name"
-  },
-  {
-  "id": "program",
-  "type": "promptString",
-  "description": "Program name"
-  }
-]
-
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(gdb) subpub debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/../../install/fqdemo_nodes/lib/fqdemo_nodes/subpub",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          }
+      ]
+    }
+  ]
 }
