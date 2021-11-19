@@ -8,16 +8,31 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
 find_package(fqdemo_msgs REQUIRED)
 
+# Include Cpp "include" directory
+include_directories(include)
+
+# Create a library we can import for our tests
 add_library(${PROJECT_NAME} src/demo_sub_pub.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 ament_target_dependencies(${PROJECT_NAME} rclcpp fqdemo_msgs)
 
+# Install Cpp executables
 add_executable(subpub src/subpub_node.cpp)
 target_include_directories(subpub PRIVATE include)
 ament_target_dependencies(subpub rclcpp fqdemo_msgs)
 target_link_libraries(subpub ${PROJECT_NAME})
+
+# install Python modules
+ament_python_install_package(${PROJECT_NAME})
+
+# Install Python executables
+install(PROGRAMS
+  scripts/py_node
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(TARGETS
   subpub
