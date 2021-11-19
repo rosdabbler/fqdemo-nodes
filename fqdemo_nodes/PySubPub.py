@@ -54,4 +54,5 @@ class PySubPub(Node):
         response_msg = NumPwrResult()
         (response_msg.to_power, response_msg.to_root) = self.apply_powers(msg.num, msg.power)
         self.publisher.publish(response_msg)
-        self.get_logger().info(f'Publishing to_power: {response_msg.to_power}, to_root: {response_msg.to_root}')
+        self.get_logger().info(
+            f'Publishing to_power: {response_msg.to_power}, to_root: {response_msg.to_root}')

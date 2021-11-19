@@ -16,12 +16,10 @@ include_directories(include)
 
 # Create a library we can import for our tests
 add_library(${PROJECT_NAME} src/demo_sub_pub.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE include)
 ament_target_dependencies(${PROJECT_NAME} rclcpp fqdemo_msgs)
 
 # Install Cpp executables
 add_executable(subpub src/subpub_node.cpp)
-target_include_directories(subpub PRIVATE include)
 ament_target_dependencies(subpub rclcpp fqdemo_msgs)
 target_link_libraries(subpub ${PROJECT_NAME})
 
@@ -46,7 +44,6 @@ if(BUILD_TESTING)
 
   # gtest
   find_package(ament_cmake_gtest REQUIRED())
-  include_directories(include)
   ament_add_gtest(test_fqdemo_nodes
     test/test_apply_powers
   )
