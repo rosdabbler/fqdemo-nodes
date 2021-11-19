@@ -36,7 +36,8 @@ class PySubPub(Node):
         timer_period_seconds = 0.5
         self.timer = self.create_timer(timer_period_seconds, self.timer_callback)
 
-    def apply_powers(self, number, power):
+    @staticmethod
+    def apply_powers(number, power):
         to_power = math.pow(number, power)
         to_root = math.pow(number, 1. / power)
         return ((to_power, to_root))

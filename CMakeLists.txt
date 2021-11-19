@@ -40,13 +40,8 @@ install(TARGETS
 )
 
 if(BUILD_TESTING)
+  # linting
   find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # uncomment the line when a copyright and license is not present in all source files
-  #set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # uncomment the line when this package is not in a git repo
-  #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 
   # gtest
@@ -57,6 +52,17 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_fqdemo_nodes ${PROJECT_NAME})
   ament_target_dependencies(test_fqdemo_nodes rclcpp fqdemo_msgs)
+
+  # pytest
+  find_package(ament_cmake_pytest REQUIRED)
+
+  ament_add_pytest_test(
+    fqdemo_nodes_pytest
+    test/test_apply_powers.py
+    PYTHON_EXECUTABLE "${PYTHON_EXECUTABLE}"
+    APPEND_ENV PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}
+  )
+
 endif()
 
 ament_package()
