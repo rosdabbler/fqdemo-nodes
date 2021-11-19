@@ -50,7 +50,8 @@ class PySubPub(Node):
         self.get_logger().info(f'Publishing to_power: {msg.to_power}, to_root: {msg.to_root}')
 
     def topic_callback(self, msg):
-        self.get_logger().info('I heard ' + msg)
+        self.get_logger().info(f'I heard {msg}')
         response_msg = NumPwrResult()
         (response_msg.to_power, response_msg.to_root) = self.apply_powers(msg.num, msg.power)
         self.publisher.publish(response_msg)
+        self.get_logger().info(f'Publishing to_power: {response_msg.to_power}, to_root: {response_msg.to_root}')
