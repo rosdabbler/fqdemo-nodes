@@ -40,3 +40,5 @@
 **/.pycache_cache
 **/__pycache__
 
+# doxygen
+doc/_build
