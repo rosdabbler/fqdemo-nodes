@@ -56,3 +56,16 @@ class PySubPub(Node):
         self.publisher.publish(response_msg)
         self.get_logger().info(
             f'Publishing to_power: {response_msg.to_power}, to_root: {response_msg.to_root}')
+
+
+def main(args=None):
+    import rclpy
+    rclpy.init(args=args)
+    pySubPub = PySubPub()
+    rclpy.spin(pySubPub)
+    pySubPub.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
