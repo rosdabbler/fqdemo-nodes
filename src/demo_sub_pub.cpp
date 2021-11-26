@@ -31,6 +31,9 @@ using std::placeholders::_1;
 namespace fqdemo_nodes
 {
 
+// TODO(rkent): implement logging as shown in
+// https://github.com/ros-planning/moveit2/blob/main/doc/MIGRATION_GUIDE.md
+
 DemoSubPub::DemoSubPub()
 : rclcpp::Node("demo_sub_pub"),
   count_(0)
@@ -42,10 +45,13 @@ DemoSubPub::DemoSubPub()
     2000ms, std::bind(&DemoSubPub::timer_callback, this));
 }
 
-std::tuple<double, double> DemoSubPub::apply_powers(const double_t number, const double power)
+std::tuple<double, double> DemoSubPub::apply_powers(
+  const double_t number,
+  const double_t exponent
+)
 {
-  double to_power = pow(number, power);
-  double to_root = pow(number, 1. / power);
+  double to_power = pow(number, exponent);
+  double to_root = pow(number, 1. / exponent);
   return std::tuple<double, double>{to_power, to_root};
 }
 
