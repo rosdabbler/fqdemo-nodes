@@ -40,5 +40,8 @@
 **/.pycache_cache
 **/__pycache__
 
-# doxygen
+# doxygen and/or rosdoc2
 doc/_build
+
+# rosdoc2 sphinx/exhale output folder
+api

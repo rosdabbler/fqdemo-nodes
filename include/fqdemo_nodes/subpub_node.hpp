@@ -13,22 +13,13 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include <memory>
+/// @file
+/// @brief This is the header file for the subpub ROS2 node.
 
-#include "fqdemo_nodes/demo_sub_pub.hpp"
-#include "fqdemo_nodes/subpub_node.hpp"
-#include "rclcpp/rclcpp.hpp"
+#ifndef FQDEMO_NODES__SUBPUB_NODE_HPP_
+#define FQDEMO_NODES__SUBPUB_NODE_HPP_
 
-// This is needed to prevent a duplicate definition warning from sphinx and breathe
-// documentation generation.
-#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+/// main function that runs the node defined by the class fqdemo_nodes::DemoSubPub
+int main(int argc, char ** argv);
 
-int main(int argc, char ** argv)
-{
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<fqdemo_nodes::DemoSubPub>());
-  rclcpp::shutdown();
-  return 0;
-}
-
-#endif // DOXYGEN_SHOULD_SKIP_THIS
+#endif // FQDEMO_NODES__SUBPUB_NODE_HPP_

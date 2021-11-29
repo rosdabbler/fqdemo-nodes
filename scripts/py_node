@@ -18,11 +18,10 @@ import rclpy
 from fqdemo_nodes.PySubPub import PySubPub
 
 def main(args=None):
-  rclpy.init(args=args)
-  pySubPub = PySubPub()
-  rclpy.spin(pySubPub)
-  pySubPub.destroy_node()
-  rclpy.shutdown()
+    rclpy.init(args)
+    pySubPub = PySubPub()
+    pySubPub.run()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
   main()
