@@ -11,7 +11,6 @@ Package API
    Full API <api/unabridged_api>
    File Structure <api/unabridged_orphan>
    Documents <doc/document_index>
-   README <README>
 
 Indices and Search
 ==================

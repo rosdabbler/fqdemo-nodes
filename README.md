@@ -51,3 +51,11 @@ to_root: 0.0
 to_power: 81.0
 to_root: 1.3160740129524924
 ```
+
+## Building the documentation
+```bash
+rosdoc2 build --package-path . \
+  --cross-reference-directory doc/_build/cross_reference \
+  --doc-build-directory doc/_build/build \
+  --output-directory doc/_build/output
+```
