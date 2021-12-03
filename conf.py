@@ -13,9 +13,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+#import sys
+#sys.path.insert(0, os.path.abspath('../../../../../fqdemo_nodes'))
+#print(f'sys.path added: {sys.path[0]}')
 
 
 # -- Project information -----------------------------------------------------
@@ -46,7 +47,7 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 # templates_path = ['/home/kent/ros2_wses/fqdemo_ws/src/fqdemo_nodes/_templates']
 import os
-print(f'PWD: {os.getcwd()}')
+print(f'Running conf.py, PWD: {os.getcwd()}')
 templates_path = ['../../../../../_templates']
 
 # List of patterns, relative to source directory, that match files and
@@ -102,7 +103,7 @@ rosdoc2_settings = {
     ## This setting, if True, will ensure exhale is part of the 'extensions',
     ## and will set all of the exhale configurations, if not set, and override
     ## settings as needed if they are set by this configuration.
-    # 'enable_exhale': True,
+    'enable_exhale': True,
 
     ## This setting, if True, will ensure intersphinx is part of the 'extensions'.
     # 'enable_intersphinx': True,

@@ -25,7 +25,7 @@ from rclpy.node import Node
 TIMER_PERIOD_SECONDS = 0.5
 
 class PySubPub(Node):
-    '''! Node to simulate a sample filter to an incoming topic, publishing result.
+    """Node to simulate a sample filter to an incoming topic, publishing result.
 
     # Main documentation for this ROS2 node
 
@@ -43,7 +43,7 @@ class PySubPub(Node):
 
     ## Class API
 
-    '''
+    """
     def __init__(self):
         super().__init__('pysubpub')
 
@@ -66,7 +66,7 @@ class PySubPub(Node):
 
     @staticmethod
     def apply_powers(
-        number:float, exponent:float) -> tuple(float, float):
+        number, exponent):
         """!
         Given a number and an exponent, calculate its power and root.
         @param number Base value to take to a power or root

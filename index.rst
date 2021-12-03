@@ -8,7 +8,8 @@ Package API
 
 .. toctree::
 
-   Full API <api/unabridged_api>
+   C++ API <api/unabridged_api>
+   Python API <modules>
    File Structure <api/unabridged_orphan>
    Documents <doc/document_index>
 
