@@ -77,6 +77,6 @@ builders:
         #         
         name: 'sphinx_builder',
         doxygen_xml_directory: 'generated/doxygen/xml',
-        output_dir: '',
-        sphinx_sourcedir: ''
+        output_dir: 'my_output_dir',
+        sphinx_sourcedir: 'doc'
     }

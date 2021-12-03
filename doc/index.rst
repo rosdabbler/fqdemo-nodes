@@ -11,7 +11,7 @@ Package API
    C++ API <api/unabridged_api>
    Python API <modules>
    File Structure <api/unabridged_orphan>
-   Documents <doc/document_index>
+   Documents <document_index>
 
 Indices and Search
 ==================
