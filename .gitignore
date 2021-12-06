@@ -42,6 +42,7 @@
 
 # doxygen and/or rosdoc2
 doc/_build
+doc/generated
 
 # rosdoc2 sphinx/exhale output folder
 api

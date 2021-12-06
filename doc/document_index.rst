@@ -1,7 +1,0 @@
-Documents
-=========
-
-.. toctree::
-    CONTRIBUTING <../../CONTRIBUTING>
-    CHANGELOG <../../CHANGELOG>
-    README <../../README>

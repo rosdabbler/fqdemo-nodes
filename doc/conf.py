@@ -18,6 +18,10 @@ import os
 #sys.path.insert(0, os.path.abspath('../../../../../fqdemo_nodes'))
 #print(f'sys.path added: {sys.path[0]}')
 
+# testing
+a_float = 1.23
+an_integer = 23
+a_boolean = True
 
 # -- Project information -----------------------------------------------------
 
@@ -48,7 +52,8 @@ extensions = [
 # templates_path = ['/home/kent/ros2_wses/fqdemo_ws/src/fqdemo_nodes/_templates']
 import os
 print(f'Running conf.py, PWD: {os.getcwd()}')
-templates_path = ['../../../../../_templates']
+#templates_path = ['../../../../../_templates']
+templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

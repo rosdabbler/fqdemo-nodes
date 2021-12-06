@@ -1,9 +1,9 @@
-Documents
-=========
+Package Documents
+=================
 
 .. toctree::
     :glob:
-    
+
     *
 
 .. toctree::
