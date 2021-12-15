@@ -1,5 +1,7 @@
 # fqdemo_nodes
 
+* The content in this repo has been merged into rosdabbler/fqdemo *
+
 This is part of an effort **fqdemo** to demonstrate various techniques in setting up a repository for a ROS2 package. This particular package contains a sample node, which uses custom messages from a separate package **fqdemo_msgs**.
 
 ## Purpose of the set of *fqdemo* packages
